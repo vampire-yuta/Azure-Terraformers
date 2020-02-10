@@ -1,12 +1,6 @@
-// resourcegroup
-resource "azurerm_resource_group" "vmss" {
- name     = var.resource_group_name
- location = var.location
-}
-
-//network
+// fqdn
 resource "random_string" "fqdn" {
- length  = 6
+ length  = 8
  special = false
  upper   = false
  number  = false
@@ -128,3 +122,4 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
    }
  }
 }
+

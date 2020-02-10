@@ -3,5 +3,5 @@ variable "location" {
 }
 
 variable "resource_group_name" {
- default     = "ResourceGroup-Chapter02"
+ default = "ResourceGroup-Chapter02"
 }

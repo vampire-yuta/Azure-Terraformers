@@ -1,7 +1,7 @@
 resource "azurerm_network_interface" "main" {
-  name                      = var.web-network_interface_name
-  location                  = var.location
-  resource_group_name       = azurerm_resource_group.resource_group.name
+  name                = var.web01-network_interface_name
+  location            = var.location
+  resource_group_name = azurerm_resource_group.resource_group.name
   network_security_group_id = azurerm_network_security_group.main.id
 
   ip_configuration {
@@ -13,29 +13,16 @@ resource "azurerm_network_interface" "main" {
 }
 
 resource "azurerm_public_ip" "main" {
-  name                = var.web-publicip
+  name                = var.web01-publicip
   location            = var.location
   resource_group_name = azurerm_resource_group.resource_group.name
   allocation_method   = "Static"
 }
 
 resource "azurerm_network_security_group" "main" {
-  name                = var.web-securitygroup
+  name                = var.web01-securitygroup
   location            = var.location
   resource_group_name = azurerm_resource_group.resource_group.name
-
-  // security_rule {
-  //   name                       = "RDP"
-  //   priority                   = 100
-  //   direction                  = "Inbound"
-  //   access                     = "Allow"
-  //   protocol                   = "Tcp"
-  //   source_port_range          = "*"
-  //   destination_port_range     = "3389"
-  //   source_address_prefix      = "*"
-  //   destination_address_prefix = "*"
-  // }
-
 }
 
 resource "azurerm_network_security_rule" "RDP" {
@@ -47,7 +34,7 @@ resource "azurerm_network_security_rule" "RDP" {
   source_port_range           = "*"
   destination_port_range      = "3389"
   source_address_prefix       = "*"
-  destination_address_prefix  = "*"
+  destination_address_prefix  = "VirtualNetwork"
   resource_group_name         = azurerm_resource_group.resource_group.name
   network_security_group_name = azurerm_network_security_group.main.name
 }
@@ -67,7 +54,7 @@ resource "azurerm_network_security_rule" "HTTP" {
 }
 
 resource "azurerm_virtual_machine" "main" {
-  name                  = var.web-vmname
+  name                  = var.web01-vmname
   location              = var.location
   resource_group_name   = azurerm_resource_group.resource_group.name
   network_interface_ids = [azurerm_network_interface.main.id]
@@ -80,13 +67,13 @@ resource "azurerm_virtual_machine" "main" {
     version   = "latest"
   }
   storage_os_disk {
-    name              = var.web-storagename
+    name              = var.web01-storagename
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
   os_profile {
-    computer_name  = var.web-hostname
+    computer_name  = var.web01-hostname
     admin_username = "testadmin"
     admin_password = "Password1234!"
   }
@@ -94,10 +81,6 @@ resource "azurerm_virtual_machine" "main" {
     provision_vm_agent        = true
     enable_automatic_upgrades = true
   }
-
-    tags = {
-        environment = "Terraform test"
-    }
 }
 
 resource "azurerm_virtual_machine_extension" "example" {

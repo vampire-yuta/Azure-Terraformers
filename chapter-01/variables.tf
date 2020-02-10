@@ -1,47 +1,56 @@
-// ResouceGroup
+//ResoureGroup
 variable "resource_group_name" {
-  type    = string
-  default = "TerraformResourceGroup"
+  type        = string
+  default     = "ResourceGroup-Chapter01"
+  description = ""
 }
 
 variable "location" {
-  type    = string
-  default = "westus"
+  type        = string
+  default     = "japaneast"
+  description = ""
 }
 
 //VirtualNetwork
 variable "virtual_network_name" {
-  type    = string
-  default = "VirtualNetwork"
+  type        = string
+  default     = "VirtualNetwork"
+  description = ""
 }
 
-//VirtualMachine Web
-variable "web-vmname" {
-  type    = string
-  default = "web"
+//VirtualMachine Web01
+variable "web01-vmname" {
+  type        = string
+  default     = "web01"
+  description = ""
 }
 
-variable "web-network_interface_name" {
-  type    = string
-  default = "web-private"
+variable "web01-network_interface_name" {
+  type        = string
+  default     = "web01-public"
+  description = ""
 }
 
-variable "web-securitygroup" {
-  type    = string
-  default = "web-securitygroup"
+variable "web01-securitygroup" {
+  type        = string
+  default     = "web01-securitygroup"
+  description = ""
 }
 
-variable "web-publicip" {
-  type    = string
-  default = "web-publicip"
+variable "web01-publicip" {
+  type        = string
+  default     = "web01-publicip"
+  description = ""
 }
 
-variable "web-hostname" {
-  type    = string
-  default = "web"
+variable "web01-hostname" {
+  type        = string
+  default     = "web01"
+  description = ""
 }
 
-variable "web-storagename" {
-  type    = string
-  default = "web-sdisk"
+variable "web01-storagename" {
+  type        = string
+  default     = "web01-sdisk"
+  description = ""
 }

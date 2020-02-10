@@ -1,4 +1,4 @@
-resource "azurerm_autoscale_setting" "example" {
+resource "azurerm_monitor_autoscale_setting" "example" {
   name                = "myAutoscaleSetting"
   resource_group_name = var.resource_group_name
   location            = var.location
@@ -8,8 +8,8 @@ resource "azurerm_autoscale_setting" "example" {
     name = "defaultProfile"
 
     capacity {
-      default = 1
-      minimum = 1
+      default = 2
+      minimum = 2
       maximum = 10
     }
 
@@ -22,14 +22,14 @@ resource "azurerm_autoscale_setting" "example" {
         time_window        = "PT5M"
         time_aggregation   = "Average"
         operator           = "GreaterThan"
-        threshold          = 75
+        threshold          = 40
       }
 
       scale_action {
         direction = "Increase"
         type      = "ChangeCount"
         value     = "1"
-        cooldown  = "PT1M"
+        cooldown  = "PT10M"
       }
     }
 
@@ -42,15 +42,16 @@ resource "azurerm_autoscale_setting" "example" {
         time_window        = "PT5M"
         time_aggregation   = "Average"
         operator           = "LessThan"
-        threshold          = 25
+        threshold          = 20
       }
 
       scale_action {
         direction = "Decrease"
         type      = "ChangeCount"
         value     = "1"
-        cooldown  = "PT1M"
+        cooldown  = "PT10M"
       }
     }
   }
 }
+
