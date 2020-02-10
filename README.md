@@ -1,2 +1,1 @@
-# Azure-Terraformers
-Azure-Terraformers
+# terraform-azure
