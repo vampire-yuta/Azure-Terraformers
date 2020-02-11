@@ -1,7 +1,7 @@
 resource "azurerm_network_interface" "main" {
-  name                = var.web01-network_interface_name
-  location            = var.location
-  resource_group_name = azurerm_resource_group.resource_group.name
+  name                      = var.web01-network_interface_name
+  location                  = var.location
+  resource_group_name       = azurerm_resource_group.resource_group.name
   network_security_group_id = azurerm_network_security_group.main.id
 
   ip_configuration {
